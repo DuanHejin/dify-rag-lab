@@ -24,11 +24,11 @@
 - [x] 配置简单 System Prompt，例如“你是一个前端面试辅导助手”
 - [x] 在控制台验证单轮对话
 - [x] 在控制台验证多轮对话
-- [ ] 生成该应用的 API Key
-- [ ] 用 curl 验证 blocking 返回
-- [ ] 用 curl 验证 streaming 返回
-- [ ] 用 curl 验证 `conversation_id` 多轮对话
-- [ ] 记录 API 路径、请求体、响应关键字段、streaming event 类型
+- [x] 生成该应用的 API Key
+- [x] 用 curl 验证 blocking 返回
+- [x] 用 curl 验证 streaming 返回
+- [x] 用 curl 验证 `conversation_id` 多轮对话
+- [x] 记录 API 路径、请求体、响应关键字段、streaming event 类型
 
 和 Super Agent Console 对照：
 
@@ -38,7 +38,7 @@
 
 建议产出：
 
-- [ ] `dify-rag-lab/docs/chat-assistant-api.md`
+- [x] `dify-rag-lab/docs/chat-assistant-api.md`
 
 ## 阶段 2：Text Generator
 
