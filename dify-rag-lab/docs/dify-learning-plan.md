@@ -67,11 +67,11 @@
 
 目标：理解 Dify 知识库、文档切片、向量检索和回答生成的完整链路。
 
-- [ ] 创建一个知识库
-- [ ] 准备 1-2 篇 Markdown 文档
-- [ ] 导入 Markdown 文档
-- [ ] 观察 Dify 的分段 / 切片配置
-- [ ] 观察索引方式、检索方式、召回参数
+- [x] 创建一个知识库
+- [x] 准备 1-2 篇 Markdown 文档
+- [x] 导入 Markdown 文档
+- [x] 观察 Dify 的分段 / 切片配置
+- [x] 观察索引方式、检索方式、召回参数
 - [ ] 将知识库绑定到 Chat Assistant 或 Chatflow
 - [ ] 在控制台提问，验证回答是否来自知识库内容
 - [ ] 用 curl 验证知识库检索回答
@@ -86,6 +86,7 @@
 建议产出：
 
 - [ ] `dify-rag-lab/docs/knowledge-rag.md`
+- [ ] `dify-rag-lab/docs/knowledge-rag-plan.md`
 
 ## 阶段 4：Workflow
 
