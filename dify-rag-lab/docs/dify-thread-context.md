@@ -155,7 +155,70 @@ Dify 不是一个单容器应用，它通常包含：
 
 所以 Dify 适合用 Docker Compose 启动。
 
-### 4.4 之前 K3S 上的项目能不能用 Docker Compose 部署？
+### 4.4 Dify 最小镜像升级流程
+
+当前本地 Dify 运行方式是 Docker Compose 拉取并启动官方镜像，例如：
+
+```yaml
+image: langgenius/dify-api:1.14.1
+image: langgenius/dify-web:1.14.1
+```
+
+这表示实际运行的代码来自 Docker 镜像，而不是本地 `api/`、`web/` 目录里的源码。
+
+因此：
+
+- 只想升级正在运行的 Dify：优先改 Docker 镜像版本。
+- 想阅读官方最新源码或做二开：再拉取官方源码 tag / branch。
+- 改了本地源码但没有重新 build 自己的镜像：不会影响当前 Docker Compose 正在运行的 Dify。
+- 真正二开部署：需要改源码、build 自己的镜像，再让 Compose 或服务器使用自己的镜像。
+
+最小升级流程：
+
+```bash
+cd /Users/duanhejin/personalProjects/dify-rag-lab/dify/docker
+
+# 1. 升级前备份配置和本地数据
+cp docker-compose.yaml docker-compose.yaml.bak
+cp .env .env.bak
+tar -cvf volumes-backup.tgz volumes
+
+# 2. 修改 docker-compose.yaml 中 Dify 核心镜像版本
+# 例如把 langgenius/dify-api:1.14.1 改成 langgenius/dify-api:1.14.2
+# 例如把 langgenius/dify-web:1.14.1 改成 langgenius/dify-web:1.14.2
+
+# 3. 拉取新镜像并重启
+docker compose down
+docker compose pull
+docker compose up -d
+```
+
+升级后优先验证：
+
+- Web 控制台能正常打开。
+- 原有管理员账号和应用配置仍然存在。
+- 模型供应商配置仍然存在。
+- 知识库文档仍然可用。
+- RAG 召回测试页面能正常显示结果。
+- API 调用 `/v1/chat-messages` 仍然可用。
+
+注意：
+
+- `docker compose pull` 只会拉取 `docker-compose.yaml` 中写明的新镜像版本。
+- `volumes` 里保存了本地数据库、上传文件、向量库等数据，升级前建议备份。
+- 不要轻易删除 `volumes`，否则可能丢失本地 Dify 数据。
+- 如果 `origin` / `upstream` 都已经改成自己的 GitHub 仓库，直接 `git fetch --tags` 拉不到 Dify 官方 tag。需要源码对齐官方版本时，可以额外添加只读 remote，例如 `official=https://github.com/langgenius/dify.git`。
+
+源码升级和镜像升级的区别：
+
+| 操作 | 作用 |
+| --- | --- |
+| 修改 `docker-compose.yaml` 镜像版本并 `docker compose pull/up` | 升级实际运行的 Dify |
+| `git fetch official --tags && git checkout 1.14.2` | 让本地源码切到官方 1.14.2 |
+| 修改本地源码但不 build 镜像 | 不影响当前运行的 Dify |
+| 修改源码并 build 自己的镜像 | 用于二开部署 |
+
+### 4.5 之前 K3S 上的项目能不能用 Docker Compose 部署？
 
 可以，但适用场景不同。
 
