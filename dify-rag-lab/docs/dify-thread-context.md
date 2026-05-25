@@ -93,6 +93,18 @@ docker compose up -d
 docker compose up -d
 ```
 
+如果出现：
+
+```text
+docker: unknown command: docker compose
+```
+
+说明当前 Docker CLI 没有启用新版 Compose 插件，应使用旧版独立命令：
+
+```bash
+docker-compose up -d
+```
+
 ## 4. 已经讨论过的关键问题
 
 ### 4.1 是否应该在当前 Super Agent Console 会话里继续研究 Dify？
@@ -188,10 +200,12 @@ tar -cvf volumes-backup.tgz volumes
 # 例如把 langgenius/dify-web:1.14.1 改成 langgenius/dify-web:1.14.2
 
 # 3. 拉取新镜像并重启
-docker compose down
-docker compose pull
-docker compose up -d
+docker-compose down
+docker-compose pull
+docker-compose up -d
 ```
+
+如果本机支持新版 Compose 插件，也可以把上面的 `docker-compose` 替换成 `docker compose`。
 
 升级后优先验证：
 
@@ -204,7 +218,7 @@ docker compose up -d
 
 注意：
 
-- `docker compose pull` 只会拉取 `docker-compose.yaml` 中写明的新镜像版本。
+- `docker-compose pull` 只会拉取 `docker-compose.yaml` 中写明的新镜像版本。
 - `volumes` 里保存了本地数据库、上传文件、向量库等数据，升级前建议备份。
 - 不要轻易删除 `volumes`，否则可能丢失本地 Dify 数据。
 - 如果 `origin` / `upstream` 都已经改成自己的 GitHub 仓库，直接 `git fetch --tags` 拉不到 Dify 官方 tag。需要源码对齐官方版本时，可以额外添加只读 remote，例如 `official=https://github.com/langgenius/dify.git`。
@@ -213,7 +227,7 @@ docker compose up -d
 
 | 操作 | 作用 |
 | --- | --- |
-| 修改 `docker-compose.yaml` 镜像版本并 `docker compose pull/up` | 升级实际运行的 Dify |
+| 修改 `docker-compose.yaml` 镜像版本并 `docker-compose pull/up` | 升级实际运行的 Dify |
 | `git fetch official --tags && git checkout 1.14.2` | 让本地源码切到官方 1.14.2 |
 | 修改本地源码但不 build 镜像 | 不影响当前运行的 Dify |
 | 修改源码并 build 自己的镜像 | 用于二开部署 |
