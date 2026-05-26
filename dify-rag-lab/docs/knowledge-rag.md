@@ -752,3 +752,127 @@ const ext = filename.includes(".") ? filename.split(".").slice(-1)[0] : ""
 ```
 
 - 后端也应尽量保证 hit-testing records 中的 `segment.document` 返回真实文档信息，避免空对象进入前端。
+
+### 5.10 添加 Jina API Key 失败：容器未走宿主机代理
+
+目标：
+
+- 在 Dify 模型供应商中添加 Jina API Key。
+- 后续用于接入 Jina Rerank，验证 RAG 召回后的二次排序效果。
+
+页面报错：
+
+```json
+{
+  "code": "invalid_param",
+  "message": "Credentials validation failed: HTTPSConnectionPool(host='api.jina.ai', port=443): Max retries exceeded with url: /v1/embeddings (Caused by NewConnectionError(\"HTTPSConnection(host='api.jina.ai', port=443): Failed to establish a new connection: [Errno 111] Connection refused\"))",
+  "status": 400
+}
+```
+
+触发接口：
+
+```text
+POST /console/api/workspaces/current/model-providers/langgenius/jina/jina/credentials
+```
+
+请求体：
+
+```json
+{
+  "credentials": {
+    "api_key": "jina_xxxx"
+  }
+}
+```
+
+初步判断：
+
+- 该错误不是 API Key 格式错误。
+- 如果 API Key 错误，通常会返回 `401 Unauthorized` 或 invalid key 类错误。
+- 当前错误发生在建立 HTTPS 连接阶段，说明 Dify 后端容器访问 `api.jina.ai` 失败。
+
+先在宿主机验证 Jina 网络连通性：
+
+```bash
+curl https://api.jina.ai/v1/embeddings
+```
+
+实际返回：
+
+```json
+{
+  "detail": "Authentication required. Provide your API key via the Authorization header: 'Authorization: Bearer <api-key>'. Get your API key at https://jina.ai/api-dashboard/key-manager.",
+  "code": "AUTH_MISSING_API_KEY"
+}
+```
+
+结论：
+
+- 宿主机可以访问 Jina。
+- `AUTH_MISSING_API_KEY` 是正常响应，说明网络已通，只是没有带 API Key。
+- 问题缩小为：宿主机能访问外部模型服务，但 Dify 容器不能访问。
+
+进一步验证容器内网络：
+
+```bash
+cd /Users/duanhejin/personalProjects/dify-rag-lab/dify/docker
+docker-compose exec api curl -I https://api.jina.ai/v1/embeddings
+```
+
+如果容器内返回连接失败，而宿主机可以访问，说明需要给 Dify 容器配置宿主机代理。
+
+解决方式：
+
+在 `docker/.env` 中追加 Docker 容器可访问的代理配置。假设宿主机代理端口为 `7897`：
+
+```env
+HTTP_PROXY=http://host.docker.internal:7897
+HTTPS_PROXY=http://host.docker.internal:7897
+http_proxy=http://host.docker.internal:7897
+https_proxy=http://host.docker.internal:7897
+NO_PROXY=localhost,127.0.0.1,api,worker,web,nginx,db_postgres,redis,weaviate,ssrf_proxy,sandbox,plugin_daemon
+no_proxy=localhost,127.0.0.1,api,worker,web,nginx,db_postgres,redis,weaviate,ssrf_proxy,sandbox,plugin_daemon
+```
+
+注意：
+
+- 容器里不能使用 `127.0.0.1:7897` 访问宿主机代理。
+- 容器里的 `127.0.0.1` 指向容器自身。
+- 在 Docker Desktop / Colima 环境中，应优先使用 `host.docker.internal:7897` 访问宿主机代理。
+- Dify 的 `SSRF_PROXY_HTTP_URL=http://ssrf_proxy:3128` 是内部 SSRF 保护代理，不等同于宿主机外网代理。
+
+重建相关容器：
+
+```bash
+cd /Users/duanhejin/personalProjects/dify-rag-lab/dify/docker
+docker-compose up -d --force-recreate api worker worker_beat plugin_daemon
+```
+
+再次回到 Dify 页面添加 Jina API Key。
+
+实际结果：
+
+- 配置 Docker 代理后，Jina API Key 可以正确添加。
+- 说明 Jina API Key 本身没问题。
+- Dify 模型供应商配置流程也没问题。
+- 根因是 Dify 后端容器没有走宿主机代理，导致无法访问 `api.jina.ai`。
+
+后续接入 Jina Rerank 的建议：
+
+```text
+检索方式：混合检索
+Rerank 模型：Jina Reranker
+Top K：8 或 10
+Score 阈值：先关闭
+```
+
+用同一组问题复测：
+
+```text
+Top K 设置为 3 代表什么？
+分段重叠长度是什么意思？
+Dify 最小镜像升级流程是什么？
+docker compose 和 docker-compose 有什么区别？
+summary_index_setting enable 为 null 为什么会报错？
+```

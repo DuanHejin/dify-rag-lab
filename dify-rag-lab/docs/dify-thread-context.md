@@ -232,7 +232,62 @@ docker-compose up -d
 | 修改本地源码但不 build 镜像 | 不影响当前运行的 Dify |
 | 修改源码并 build 自己的镜像 | 用于二开部署 |
 
-### 4.5 之前 K3S 上的项目能不能用 Docker Compose 部署？
+### 4.5 外部模型供应商网络排查规则
+
+在 Dify 页面添加外部模型供应商 API Key 时，校验请求通常由 Dify 后端容器发起，而不是浏览器直接访问模型厂商。
+
+如果页面报类似错误：
+
+```text
+Credentials validation failed
+HTTPSConnectionPool(...)
+Failed to establish a new connection
+Connection refused
+```
+
+优先按下面顺序排查：
+
+1. 在宿主机验证外部服务是否可访问。
+
+```bash
+curl https://api.jina.ai/v1/embeddings
+```
+
+如果返回认证缺失，例如 `AUTH_MISSING_API_KEY`，说明宿主机网络是通的。
+
+2. 在 Dify API 容器内验证同一个地址。
+
+```bash
+cd /Users/duanhejin/personalProjects/dify-rag-lab/dify/docker
+docker-compose exec api curl -I https://api.jina.ai/v1/embeddings
+```
+
+如果宿主机可访问、容器不可访问，通常是容器没有走宿主机代理。
+
+3. 在 `docker/.env` 中配置容器代理。
+
+```env
+HTTP_PROXY=http://host.docker.internal:7897
+HTTPS_PROXY=http://host.docker.internal:7897
+http_proxy=http://host.docker.internal:7897
+https_proxy=http://host.docker.internal:7897
+NO_PROXY=localhost,127.0.0.1,api,worker,web,nginx,db_postgres,redis,weaviate,ssrf_proxy,sandbox,plugin_daemon
+no_proxy=localhost,127.0.0.1,api,worker,web,nginx,db_postgres,redis,weaviate,ssrf_proxy,sandbox,plugin_daemon
+```
+
+4. 重建相关容器。
+
+```bash
+docker-compose up -d --force-recreate api worker worker_beat plugin_daemon
+```
+
+注意：
+
+- 容器访问宿主机代理时应使用 `host.docker.internal`。
+- 不要在容器代理里写 `127.0.0.1:7897`，因为容器里的 `127.0.0.1` 指向容器自身。
+- `SSRF_PROXY_HTTP_URL=http://ssrf_proxy:3128` 是 Dify 内部 SSRF 保护代理，不等同于宿主机外网代理。
+
+### 4.6 之前 K3S 上的项目能不能用 Docker Compose 部署？
 
 可以，但适用场景不同。
 
