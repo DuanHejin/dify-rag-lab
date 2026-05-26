@@ -1,0 +1,7 @@
+interface:
+  display_name: "个人文章系列生成"
+  short_description: "按你的叙事风格生成三平台技术文章"
+  default_prompt: "Use $personal-article-series to turn my project notes into WeChat, Zhihu, and Juejin article drafts."
+
+policy:
+  allow_implicit_invocation: true
