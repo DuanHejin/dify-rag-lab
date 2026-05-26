@@ -971,3 +971,111 @@ summary_index_setting enable 为 null 为什么会报错？
 - 观察响应中的 `metadata.retriever_resources`。
 - 记录命中的 `dataset_name`、`document_name`、`content`、`score` 等字段。
 - 验证无关问题时是否不会强行引用知识库。
+
+## 7. Chat Assistant RAG API 验证
+
+### 7.1 知识库相关问题
+
+请求方式：
+
+```text
+POST http://localhost:8080/v1/chat-messages
+response_mode: blocking
+conversation_id: de19b43f-59f5-4d07-a5ad-7cd8da3b7404
+```
+
+问题：
+
+```text
+Dify 最小镜像升级流程是什么？
+```
+
+返回结果摘要：
+
+- `metadata.retriever_resources` 返回 3 条知识库命中结果。
+- 第一条命中分数明显最高，是主要有效上下文。
+- 豆包模型基于召回内容生成了“Dify 最小镜像升级流程”的结构化回答。
+
+第一条命中：
+
+```text
+dataset_name: dify学习知识库
+document_name: dify-thread-context.md
+score: 0.6939131
+content: 4.4 Dify 最小镜像升级流程
+```
+
+第一条命中内容包含：
+
+```text
+- 当前本地 Dify 运行方式是 Docker Compose 拉取并启动官方镜像。
+- 实际运行代码来自 Docker 镜像，而不是本地 api/、web/ 目录源码。
+- 最小升级流程包括备份 docker-compose.yaml、.env、volumes，修改镜像版本，执行 docker-compose down/pull/up。
+- 升级后需要验证 Web 控制台、管理员账号、应用配置、模型供应商、知识库、API 调用。
+```
+
+第二条命中：
+
+```text
+dataset_name: dify学习知识库
+document_name: knowledge-rag.md
+score: 0.2346732
+content: Docker 代理、Jina API Key、Rerank 配置相关记录
+```
+
+第三条命中：
+
+```text
+dataset_name: dify学习知识库
+document_name: dify-learning-plan.md
+score: 0.00046479
+content: Dify / RAG 学习计划开头
+```
+
+观察：
+
+- 第一条命中高度相关。
+- 第二、三条相关性明显较低，属于补充或噪声。
+- 当前 Top K 返回 3 条时可正常回答，但后续如果想减少噪声，可以尝试 Top K=1/2 或开启 score 阈值。
+
+阶段结论：
+
+- Chat Assistant API blocking 调用已验证 RAG 生效。
+- `metadata.retriever_resources` 可以用于观察实际命中的知识库、文档、片段和分数。
+- 回答内容不是纯模型记忆，而是基于召回片段生成。
+
+### 7.2 无关问题
+
+问题：
+
+```text
+今天北京天气怎么样？
+```
+
+返回结果摘要：
+
+```text
+知识库中没有找到北京今日天气的相关资料，我作为 RAG 方向的求职准备助手，核心服务内容是为你提供求职相关的技能准备、面试指导、项目优化等求职类相关支持，暂时不支持实时天气信息的查询。
+```
+
+关键字段：
+
+```json
+{
+  "metadata": {
+    "retriever_resources": []
+  }
+}
+```
+
+观察：
+
+- 无关问题没有命中知识库，`retriever_resources` 为空数组。
+- 回答没有强行引用知识库。
+- 模型明确说明知识库中没有相关资料，并把用户引导回求职准备助手的能力范围。
+
+阶段结论：
+
+- 相关问题可以触发知识库召回。
+- 无关问题不会强行引用知识库。
+- Chat Assistant 的 RAG API 主链路验证完成。

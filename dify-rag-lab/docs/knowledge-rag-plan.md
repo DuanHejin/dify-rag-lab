@@ -129,14 +129,14 @@ Embedding 模型：火山方舟 embeddingversion
 
 目标：用 `/chat-messages` 验证知识库检索结果，并观察 `retriever_resources` 字段。
 
-- [ ] 使用 blocking 调用知识库问题
+- [x] 使用 blocking 调用知识库问题
 - [ ] 使用 streaming 调用知识库问题
-- [ ] 记录 `metadata.retriever_resources`
-- [ ] 记录命中文档 `dataset_name`
-- [ ] 记录命中文档 `document_name`
-- [ ] 记录命中片段内容摘要
-- [ ] 记录 score 或相似度字段
-- [ ] 验证无关问题时 `retriever_resources` 的表现
+- [x] 记录 `metadata.retriever_resources`
+- [x] 记录命中文档 `dataset_name`
+- [x] 记录命中文档 `document_name`
+- [x] 记录命中片段内容摘要
+- [x] 记录 score 或相似度字段
+- [x] 验证无关问题时 `retriever_resources` 的表现
 
 blocking 请求模板：
 
