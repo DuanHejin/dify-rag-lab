@@ -1079,3 +1079,68 @@ content: Dify / RAG 学习计划开头
 - 相关问题可以触发知识库召回。
 - 无关问题不会强行引用知识库。
 - Chat Assistant 的 RAG API 主链路验证完成。
+
+### 7.3 Streaming 模式
+
+请求方式：
+
+```text
+POST http://localhost:8080/v1/chat-messages
+response_mode: streaming
+conversation_id: dd1a6cd8-46b1-4454-9028-aab0fec339f5
+```
+
+问题仍然是知识库相关问题：
+
+```text
+Dify 最小镜像升级流程是什么？
+```
+
+流式返回观察：
+
+- 中间会持续返回多个 `event=message` 事件。
+- 每个 `message` 事件只包含增量 `answer` 片段。
+- 这些增量片段共享同一个 `conversation_id`、`message_id`、`task_id`。
+- `metadata.retriever_resources` 不在普通 `message` 事件中返回。
+- 最终 `event=message_end` 中返回完整 `metadata`，包括 `retriever_resources` 和 `usage`。
+
+普通 `message` 事件示例：
+
+```json
+{
+  "event": "message",
+  "conversation_id": "dd1a6cd8-46b1-4454-9028-aab0fec339f5",
+  "message_id": "bee629bb-22fe-4770-aaf5-a29f5441e64f",
+  "answer": "<think>\n我"
+}
+```
+
+最终 `message_end` 事件关键字段：
+
+```json
+{
+  "event": "message_end",
+  "metadata": {
+    "retriever_resources": [
+      {
+        "position": 1,
+        "dataset_name": "dify学习知识库",
+        "document_name": "dify-thread-context.md",
+        "score": 0.6939131,
+        "content": "4.4 Dify 最小镜像升级流程..."
+      }
+    ],
+    "usage": {
+      "total_tokens": 2417,
+      "total_price": "0.0044502",
+      "currency": "RMB"
+    }
+  }
+}
+```
+
+阶段结论：
+
+- Streaming 模式下 RAG 同样生效。
+- 前端如果要边流式展示回答、边展示引用来源，需要等到 `message_end` 后再读取 `metadata.retriever_resources`。
+- 如果业务上希望更早展示引用，可以先在 UI 中显示“正在检索/生成”，等 `message_end` 到达后补充引用来源。

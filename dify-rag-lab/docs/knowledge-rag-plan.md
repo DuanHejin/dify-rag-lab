@@ -130,7 +130,7 @@ Embedding 模型：火山方舟 embeddingversion
 目标：用 `/chat-messages` 验证知识库检索结果，并观察 `retriever_resources` 字段。
 
 - [x] 使用 blocking 调用知识库问题
-- [ ] 使用 streaming 调用知识库问题
+- [x] 使用 streaming 调用知识库问题
 - [x] 记录 `metadata.retriever_resources`
 - [x] 记录命中文档 `dataset_name`
 - [x] 记录命中文档 `document_name`
