@@ -876,3 +876,64 @@ Dify 最小镜像升级流程是什么？
 docker compose 和 docker-compose 有什么区别？
 summary_index_setting enable 为 null 为什么会报错？
 ```
+
+### 5.11 Rerank 生效判断与召回测试历史缓存
+
+现象：
+
+- 页面已选择 Jina Rerank 模型：`jina-reranker-v3`。
+- 但在旧的召回测试历史记录中继续点击“测试”，Network 请求体里仍然出现：
+
+```json
+{
+  "retrieval_model": {
+    "search_method": "hybrid_search",
+    "reranking_enable": false,
+    "reranking_mode": "reranking_model",
+    "reranking_model": {
+      "reranking_provider_name": "langgenius/jina/jina",
+      "reranking_model_name": "jina-reranker-v3"
+    }
+  }
+}
+```
+
+关键判断：
+
+- 是否真正启用 Rerank，不能只看 `reranking_model` 字段是否存在。
+- 应以 `reranking_enable` 是否为 `true` 作为判断依据。
+- `reranking_model` 存在但 `reranking_enable=false` 时，说明请求携带了模型配置，但本次检索不会实际执行 Rerank。
+
+原因推断：
+
+- Dify 召回测试历史会保留当次测试的 `retrieval_model` 配置快照。
+- 从历史记录中选择某一项继续测试时，可能会沿用当时的检索方式、Top K、权重、Rerank 开关等参数。
+- 修改知识库检索设置后，如果继续复用旧历史测试项，可能看不到新配置生效。
+
+正确做法：
+
+- 修改 Rerank、Top K、权重或检索方式后，重新新建一次召回测试。
+- 重新测试时检查请求体，确认：
+
+```json
+{
+  "reranking_enable": true,
+  "reranking_mode": "reranking_model",
+  "reranking_model": {
+    "reranking_provider_name": "langgenius/jina/jina",
+    "reranking_model_name": "jina-reranker-v3"
+  }
+}
+```
+
+实际结果：
+
+- 新建召回测试后，Rerank 正常启用。
+- 混合检索 + Jina Rerank 能拿到最符合问题的召回段落。
+- 说明当前 RAG 链路已经验证到：基础召回 + Rerank 二次排序。
+
+后续进入下一项：
+
+- 将 `dify学习知识库` 绑定到已有应用 `简单的求职聊天助手`。
+- 在调试预览中验证回答是否使用知识库内容。
+- 再用 `/v1/chat-messages` 验证响应中的 `metadata.retriever_resources`。
