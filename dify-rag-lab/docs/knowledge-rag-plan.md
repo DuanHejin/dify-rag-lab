@@ -67,12 +67,12 @@ Embedding 模型：火山方舟 embeddingversion
 目标：理解文档如何被切成 chunk，以及这些 chunk 如何影响召回。
 
 - [x] 查看每篇文档的分段 / 切片结果
-- [ ] 记录默认切片策略
+- [x] 记录默认切片策略
 - [x] 记录 chunk 数量
-- [ ] 观察 chunk 是否保留标题层级
-- [ ] 观察是否存在切片过短、过长、语义断裂的问题
-- [ ] 修改一次切片配置并重新导入或重建索引
-- [ ] 对比修改前后的 chunk 效果
+- [x] 观察 chunk 是否保留标题层级
+- [x] 观察是否存在切片过短、过长、语义断裂的问题
+- [x] 修改一次切片配置并重新导入或重建索引
+- [x] 对比修改前后的 chunk 效果
 
 重点问题：
 
@@ -111,14 +111,14 @@ Embedding 模型：火山方舟 embeddingversion
 
 目标：让已有的“简单的求职聊天助手”使用知识库回答问题。
 
-- [ ] 打开 Chat Assistant 编排页面
+- [x] 打开 Chat Assistant 编排页面
 - [x] 绑定新建知识库
 - [x] 配置检索参数
-- [ ] 发布更新
+- [x] 发布更新
 - [x] 在调试预览中提问
 - [x] 验证回答内容来自知识库
 - [x] 验证回答中是否展示引用来源
-- [ ] 验证无关问题时是否不会强行引用知识库
+- [x] 验证无关问题时是否不会强行引用知识库
 
 注意：
 
@@ -159,12 +159,10 @@ curl --location --request POST 'http://localhost:8080/v1/chat-messages' \
 
 目标：理解 Dify 知识库元数据过滤如何影响召回范围。
 
-- [ ] 为文档或片段配置元数据
-- [ ] 设计元数据字段，例如 `doc_type`、`role`、`stage`
-- [ ] 创建至少两类文档元数据
-- [ ] 在检索配置中启用元数据过滤
-- [ ] 用相同问题测试不过滤和过滤后的召回差异
-- [ ] 记录元数据过滤是否影响 `retriever_resources`
+- [x] 理解元数据过滤的概念：检索前按文档或片段标签缩小检索范围
+- [x] 检查知识库设置和召回测试页面是否有元数据过滤入口
+- [x] 记录当前 Dify 1.14.2 页面未找到元数据过滤入口
+- [ ] 后续在 Chatflow / Workflow 的知识检索节点中确认是否支持元数据过滤
 
 建议元数据：
 
@@ -191,11 +189,11 @@ stage: job_prepare
 
 目标：知道 RAG 不命中、命中错误或配置错误时表现如何。
 
-- [ ] 提问知识库完全无关的问题
+- [x] 提问知识库完全无关的问题
 - [ ] 提问模糊问题，观察是否会错误召回
 - [ ] 暂时解绑知识库后再次 API 调用
 - [ ] 删除或禁用文档后再次检索
-- [ ] 记录错误响应或降级表现
+- [x] 记录错误响应或降级表现
 
 ## 10. 和 Super Agent Console 对照
 
@@ -214,20 +212,20 @@ stage: job_prepare
 
 ## 11. 阶段产出
 
-- [ ] 完成 `dify-rag-lab/docs/knowledge-rag.md`
-- [ ] 保存 RAG API curl 示例
-- [ ] 保存检索命中样例
-- [ ] 保存元数据过滤实验结果
-- [ ] 更新 `dify-rag-lab/docs/dify-learning-plan.md`
+- [x] 完成 `dify-rag-lab/docs/knowledge-rag.md`
+- [x] 保存 RAG API curl 示例
+- [x] 保存检索命中样例
+- [x] 记录元数据过滤当前页面未找到入口，后续在 Chatflow / Workflow 再确认
+- [x] 更新 `dify-rag-lab/docs/dify-learning-plan.md`
 
 ## 12. 阶段完成标准
 
-- [ ] 至少 1 个知识库创建成功
-- [ ] 至少 2 篇 Markdown 文档导入成功
-- [ ] 能看到文档切片结果
-- [ ] 能在知识库内检索命中正确 chunk
-- [ ] Chat Assistant 能基于知识库回答
-- [ ] API 响应中能看到 `retriever_resources`
+- [x] 至少 1 个知识库创建成功
+- [x] 至少 2 篇 Markdown 文档导入成功
+- [x] 能看到文档切片结果
+- [x] 能在知识库内检索命中正确 chunk
+- [x] Chat Assistant 能基于知识库回答
+- [x] API 响应中能看到 `retriever_resources`
 - [ ] 完成一次元数据过滤实验
-- [ ] 完成一次无命中或错误边界实验
+- [x] 完成一次无命中或错误边界实验
 - [ ] 完成 Dify Knowledge 与自研 RAG 模块对照

@@ -141,6 +141,7 @@
 建议产出：
 
 - [ ] `dify-rag-lab/docs/chatflow-api.md`
+- [ ] `dify-rag-lab/docs/chatflow-plan.md`
 
 ## 阶段 6：Agent + Tool
 
@@ -210,9 +211,9 @@
 
 ## 最终验收清单
 
-- [ ] 本地 Dify 可以稳定启动和访问
+- [x] 本地 Dify 可以稳定启动和访问
 - [ ] 至少创建 5 类应用：Text Generator、Chat Assistant、Agent、Workflow、Chatflow
-- [ ] 至少创建 1 个知识库并完成 RAG 问答
+- [x] 至少创建 1 个知识库并完成 RAG 问答
 - [ ] 至少注册 1 个 Tool 并完成 Agent 工具调用
 - [ ] 每类应用都有 API Key
 - [ ] 每类应用都有 curl 示例
