@@ -7,11 +7,11 @@
 ## 1. 学习目标
 
 - [x] 理解 Chatflow 和 Chat Assistant 的区别
-- [ ] 理解 Chatflow 和 Workflow 的区别
+- [x] 理解 Chatflow 和 Workflow 的区别
 - [x] 理解 Chatflow 中每个节点的输入、输出和变量引用
 - [x] 验证 Chatflow 如何接入知识库做 RAG
 - [x] 验证 Chatflow API 的 blocking、streaming 和多轮会话
-- [ ] 记录 Chatflow 与自研 Conversation + Workflow + RAG 的概念对照
+- [x] 记录 Chatflow 与自研 Conversation + Workflow + RAG 的概念对照
 
 ## 2. 准备工作
 
@@ -153,8 +153,8 @@ Dify 最小镜像升级流程是什么？
 - [x] 验证 Answer 节点输出最终回答
 - [x] 单轮提问无关问题
 - [x] 验证无关问题不会强行引用知识库
-- [ ] 多轮对话中继续追问
-- [ ] 观察 Chatflow 是否保留会话上下文
+- [x] 多轮对话中继续追问
+- [x] 观察 Chatflow 是否保留会话上下文
 
 记录项：
 
@@ -286,3 +286,311 @@ Chatflow：适合可控、可解释的多轮聊天编排
 - [x] API streaming 调用成功
 - [x] 多轮 `conversation_id` 验证成功
 - [x] 能说清 Chatflow 与 Chat Assistant / Workflow 的区别
+
+## 16. Chatflow V2 进阶计划
+
+目标：在已经跑通的 `求职助手Chatflow RAG` 基础上复制一个 V2 版本，继续学习 Chatflow 的流程控制能力。V2 不再只验证 `Start -> Knowledge Retrieval -> LLM -> Answer` 主干链路，而是重点验证条件分支、变量提取、信息补全、确定性兜底和节点级路由。
+
+建议应用：
+
+```text
+原应用：求职助手Chatflow RAG
+新应用：求职助手Chatflow RAG V2
+模型：doubao-seed-2-0-lite-260428
+知识库：dify学习知识库
+Rerank：Jina reranker-v3
+```
+
+### 16.1 复制 V1 应用
+
+目标：保留 V1 的稳定 RAG 链路，单独用 V2 做进阶节点实验。
+
+- [x] 复制 `求职助手Chatflow RAG` 为 `求职助手Chatflow RAG V2`
+- [x] 确认 V2 仍然绑定 `dify学习知识库`
+- [x] 确认 V2 仍然使用 `doubao-seed-2-0-lite-260428`
+- [x] 确认 V2 仍然使用 Jina Rerank
+- [x] 在调试预览中用原问题验证 V2 基础链路仍可用
+- [x] 记录 V2 的应用名称和 API Key 占位符
+
+当前记录：
+
+```text
+应用名称：求职助手Chatflow RAG V2
+回答前缀：Chatflow-RAG-V2.0
+验证结果：可以命中知识库并基于召回内容回答
+```
+
+建议测试问题：
+
+```text
+Dify 最小镜像升级流程是什么？
+```
+
+### 16.2 添加用户信息补全分支
+
+目标：验证 Chatflow 可以在信息不足时先追问用户，而不是直接让 LLM 生成不完整答案。
+
+实验场景：
+
+```text
+用户：我想准备面试
+系统：请补充岗位方向和准备时间，例如“前端开发，3 天”。
+```
+
+计划节点：
+
+```text
+Start
+-> 参数提取 / 判断节点
+-> IF/ELSE
+   -> 信息不完整：Answer 追问用户
+   -> 信息完整：进入后续流程
+```
+
+待完成：
+
+- [x] 明确需要收集的字段：`job_type`、`days`
+- [x] 设计信息不完整的测试输入
+- [x] 添加用于识别字段是否完整的节点
+- [x] 添加 IF/ELSE 节点
+- [x] 配置信息不完整分支
+- [x] 配置追问用户的 Answer 节点
+- [x] 测试用户补充信息后的下一轮表现
+- [x] 记录多轮信息补全是否符合预期
+
+当前实现：
+
+```text
+Start
+-> 参数提取 LLM 节点
+-> IF/ELSE 判断 `structured_output.is_complete` 是否为 true
+   -> true：进入知识检索分支
+   -> false：直接回复“信息不够明确”
+```
+
+参数提取节点已开启结构化输出，真实输出字段为 `structured_output`，内部字段名使用下划线形式：
+
+```text
+Structured Output:
+- job_type
+- days
+- weak_points
+- is_complete
+```
+
+参数提取节点输出样例：
+
+```json
+{
+  "text": "<think>...</think>{\"job_type\": \"前端开发\", \"days\": 3, \"weak_points\": [\"算法\", \"项目表达\"], \"is_complete\": true}",
+  "reasoning_content": "",
+  "structured_output": {
+    "job_type": "前端开发",
+    "days": 3,
+    "weak_points": [
+      "算法",
+      "项目表达"
+    ],
+    "is_complete": true
+  }
+}
+```
+
+注意：IF/ELSE 应优先读取 `structured_output.is_complete`，不要从 `text` 中解析 JSON。`text` 里可能包含模型的 `<think>` 内容，不适合作为稳定判断来源。
+
+验证结果：
+
+```text
+case1:
+输入：我想准备面试
+结果：is_complete = false，进入 else 分支，返回“信息不够明确”
+
+case2:
+输入：我是前端开发，还有 3 天面试，算法和项目表达比较弱。
+结果：is_complete = true，进入知识检索分支，召回知识库内容，LLM 基于知识库内容进一步总结回答
+
+case3:
+第一轮输入：我想准备面试
+第一轮结果：is_complete = false，进入 else 分支，返回“信息不够明确”
+第二轮输入：前端开发，3 天，算法和项目表达比较弱
+第二轮结果：流程重新从 Start 开始执行，参数提取节点识别为信息完整，进入知识检索分支，最终输出以【Chatflow-RAG-V2.0】开头的 3 天前端面试准备方案
+引用来源：chat-assistant-api.md
+```
+
+结论：
+
+- 追问分支本质是一个 Answer 回复节点，本轮到此结束。
+- 用户再次输入时，Chatflow 会重新从 Start 开始执行，而不是从追问节点后面继续执行。
+- 在第二轮输入已经包含完整字段时，参数提取节点可以重新提取 `job_type`、`days`、`weak_points` 和 `is_complete`，并进入正确分支。
+
+### 16.3 添加无关问题确定性分支
+
+目标：验证无关问题可以由 IF/ELSE 或分类节点直接兜底，不必每次都交给大模型判断。
+
+实验场景：
+
+```text
+用户：今天北京天气怎么样？
+系统：这个应用只回答 Dify / RAG 学习和求职准备相关问题。
+```
+
+计划节点：
+
+```text
+Start
+-> 问题分类 / 关键词判断
+-> IF/ELSE
+   -> 无关问题：Answer 直接兜底
+   -> 相关问题：继续知识检索或 LLM
+```
+
+待完成：
+
+- [x] 明确哪些问题属于无关问题
+- [x] 选择判断方式：关键词规则 / 分类节点 / LLM 分类节点
+- [x] 添加无关问题判断节点
+- [x] 添加 IF/ELSE 分支
+- [x] 配置无关问题直接回复
+- [x] 验证无关问题不进入知识检索节点
+- [x] 验证相关问题仍能正常进入 RAG 链路
+
+当前实现：
+
+```text
+参数提取节点新增结构化字段：intent
+
+intent 可选值：
+- job_prepare
+- dify_learning
+- out_of_scope
+```
+
+`is_complete` 的含义调整为“当前 intent 对应的必要信息是否完整”：
+
+```text
+intent = dify_learning -> is_complete = true
+intent = job_prepare 且 job_type 不为空且 days 不为 null -> is_complete = true
+intent = job_prepare 但缺少 job_type 或 days -> is_complete = false
+intent = out_of_scope -> is_complete = false
+```
+
+IF/ELSE 节点当前配置：
+
+```text
+IF:
+  structured_output.is_complete 是 True
+  -> 知识检索分支
+
+ELIF:
+  structured_output.intent 包含 job_prepare
+  -> 补充信息回复节点
+  -> 固定回复：信息不够明确，请补充信息，如岗位、计划时间、薄弱项目。
+
+ELSE:
+  -> 暂不支持回复节点
+  -> 固定回复：暂不支持此类对话，请咨询面试，RAG相关知识。
+```
+
+说明：
+
+- `dify_learning` 和信息完整的 `job_prepare` 都会因为 `is_complete=true` 进入知识检索分支。
+- 信息不完整的 `job_prepare` 会进入补充信息分支。
+- `out_of_scope` 会进入暂不支持分支。
+- 如果 `intent` 是枚举值，IF/ELSE 中用“等于 job_prepare”会比“包含 job_prepare”更严格；当前用“包含”也能工作，但后续可视情况改成“等于”。
+
+验证结果：
+
+```text
+case1:
+输入：我想准备面试
+结果：进入补充信息分支，回复“信息不够明确，请补充信息，如岗位、计划时间、薄弱项目。”
+
+case2:
+输入：Dify 最小镜像升级流程是什么？
+结果：进入知识检索分支，从知识库召回内容并回答。
+
+case3:
+输入：北京天气怎么样？
+结果：进入暂不支持分支，回复“暂不支持此类对话，请咨询面试，RAG相关知识。”
+```
+
+### 16.4 添加知识检索结果为空分支
+
+状态：暂缓。当前先进入 Workflow 阶段，后续需要继续强化 Chatflow 时再补。
+
+目标：让“知识库无结果”和“知识库有结果”走不同分支，减少 LLM 对空上下文的误判。
+
+计划节点：
+
+```text
+Knowledge Retrieval
+-> IF/ELSE 判断 result 是否为空
+   -> 空：Answer 说明知识库中没有找到相关资料
+   -> 非空：LLM 基于知识库回答
+```
+
+待完成：
+
+- [ ] 确认知识检索节点输出变量名称：`result`
+- [ ] 确认 `result=[]` 时的判断条件写法
+- [ ] 添加 IF/ELSE 节点判断检索结果是否为空
+- [ ] 配置空结果分支的 Answer
+- [ ] 配置非空结果分支进入 LLM
+- [ ] 用天气问题验证空结果分支
+- [ ] 用 Dify 升级问题验证非空结果分支
+
+### 16.5 添加变量提取与结构化输出
+
+状态：暂缓。当前先进入 Workflow 阶段，后续需要继续强化 Chatflow 时再补。
+
+目标：验证 Chatflow 中可以先把用户输入提取成结构化变量，再把变量传给后续节点。
+
+实验输入：
+
+```text
+我是前端开发，还有 3 天面试，算法和项目表达比较弱。
+```
+
+期望变量：
+
+```text
+job_type: 前端开发
+days: 3
+weak_points: 算法、项目表达
+```
+
+待完成：
+
+- [ ] 添加变量提取节点或 LLM 提取节点
+- [ ] 设计结构化输出格式
+- [ ] 将提取结果传给后续 IF/ELSE 或 LLM 节点
+- [ ] 验证完整输入可以直接生成计划
+- [ ] 验证缺字段输入会进入信息补全分支
+- [ ] 记录变量在节点间的传递方式
+
+### 16.6 API 验证 V2
+
+状态：暂缓。当前先进入 Workflow 阶段，后续需要继续强化 Chatflow 时再补。
+
+目标：确认 V2 的流程分支不仅在页面调试中生效，也能通过 API 生效。
+
+- [ ] 发布 V2 应用
+- [ ] 生成或确认 V2 API Key
+- [ ] blocking 调用完整信息问题
+- [ ] blocking 调用信息不完整问题
+- [ ] blocking 调用无关问题
+- [ ] streaming 调用知识库相关问题
+- [ ] 观察 streaming 中分支节点事件
+- [ ] 记录 V2 与 V1 的响应差异
+- [ ] 更新 `dify-rag-lab/docs/03-chatflow/api.md`
+
+### 16.7 阶段完成标准
+
+- [x] V2 应用复制完成，并保留 V1 基础 RAG 能力
+- [x] 能用节点判断信息是否完整
+- [x] 能在信息不足时追问用户
+- [x] 能用节点处理无关问题兜底
+- [ ] 能根据知识检索结果是否为空走不同分支
+- [x] 能提取用户输入中的结构化变量
+- [ ] API 能验证至少 3 条分支路径
+- [x] 能说清哪些判断适合节点确定性处理，哪些判断适合交给 LLM

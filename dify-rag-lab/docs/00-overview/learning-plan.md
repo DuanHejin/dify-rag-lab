@@ -125,12 +125,14 @@
 - [x] 接入 LLM 节点
 - [x] 接入 Answer 节点
 - [x] 在控制台验证单轮对话
-- [ ] 在控制台验证多轮对话
+- [x] 在控制台验证多轮对话
 - [x] 生成该应用的 API Key
 - [x] 用 curl 验证 blocking 返回
 - [x] 用 curl 验证 streaming 返回
 - [x] 用 curl 验证 `conversation_id` 多轮对话
 - [x] 记录 Chatflow 的 API 路径、请求体、响应关键字段、streaming event 类型
+- [x] 复制 Chatflow RAG 为 V2，验证结构化参数提取、IF/ELSE、信息补全、intent 分流和无关问题兜底
+- [ ] Chatflow V2 后续增强：检索结果为空分支、结构化变量传入最终 LLM、API 分支验证；当前暂缓，先进入 Workflow 阶段
 
 和 Super Agent Console 对照：
 
