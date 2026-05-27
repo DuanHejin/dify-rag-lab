@@ -507,15 +507,16 @@ dify-rag-lab/
 建议在 `dify/dify-rag-lab/docs/` 下维护这些文档：
 
 ```text
-dify-rag-lab/docs/dify-learning-plan.md              # 总计划，完成一项勾一项
-dify-rag-lab/docs/chat-assistant-api.md              # Chat Assistant API 验证记录
-dify-rag-lab/docs/text-generator-api.md              # Text Generator API 验证记录
-dify-rag-lab/docs/knowledge-rag.md                   # 知识库 / RAG 验证记录
-dify-rag-lab/docs/workflow-api.md                    # Workflow API 验证记录
-dify-rag-lab/docs/chatflow-api.md                    # Chatflow API 验证记录
-dify-rag-lab/docs/agent-tool-api.md                  # Agent Tool 调用验证记录
-dify-rag-lab/docs/dify-api-curl-cases.md             # curl 用例汇总
-dify-rag-lab/docs/dify-vs-super-agent-console.md     # Dify 与自研项目对照表
+dify-rag-lab/docs/README.md                          # 文档目录规则和索引
+dify-rag-lab/docs/00-overview/learning-plan.md       # 总计划，完成一项勾一项
+dify-rag-lab/docs/00-overview/thread-context.md      # 新线程背景上下文
+dify-rag-lab/docs/01-chat-assistant/plan.md          # Chat Assistant 学习计划
+dify-rag-lab/docs/01-chat-assistant/api.md           # Chat Assistant API 验证记录
+dify-rag-lab/docs/02-knowledge-rag/plan.md           # Knowledge / RAG 学习计划
+dify-rag-lab/docs/02-knowledge-rag/lab.md            # 知识库 / RAG 验证记录
+dify-rag-lab/docs/02-knowledge-rag/config-notes.md   # 知识库配置说明
+dify-rag-lab/docs/03-chatflow/plan.md                # Chatflow 学习计划
+dify-rag-lab/docs/03-chatflow/api.md                 # Chatflow API 验证记录
 ```
 
 ## 9. 新 Codex 线程建议入口
@@ -523,9 +524,9 @@ dify-rag-lab/docs/dify-vs-super-agent-console.md     # Dify 与自研项目对�
 新线程可以这样开始：
 
 ```text
-请先阅读 dify-rag-lab/README.md、dify-rag-lab/docs/dify-thread-context.md 和 dify-rag-lab/docs/dify-learning-plan.md。
+请先阅读 dify-rag-lab/README.md、dify-rag-lab/docs/README.md、dify-rag-lab/docs/00-overview/thread-context.md 和 dify-rag-lab/docs/00-overview/learning-plan.md。
 我已经在本地通过 Docker Compose 启动了 Dify，并且在设置页接入了豆包模型。
-接下来请按计划从 Chat Assistant 开始，带我完成页面配置、API Key 生成、blocking/streaming curl 验证，并把完成项勾到 dify-rag-lab/docs/dify-learning-plan.md 中。
+接下来请按计划从 Chat Assistant 开始，带我完成页面配置、API Key 生成、blocking/streaming curl 验证，并把完成项勾到 dify-rag-lab/docs/00-overview/learning-plan.md 中。
 ```
 
 ## 10. 当前下一步
@@ -546,5 +547,5 @@ dify-rag-lab/docs/dify-vs-super-agent-console.md     # Dify 与自研项目对�
 6. curl 验证 blocking
 7. curl 验证 streaming
 8. curl 验证 conversation_id 多轮
-9. 整理 `dify-rag-lab/docs/chat-assistant-api.md`
-10. 在 `dify-rag-lab/docs/dify-learning-plan.md` 中勾选已完成项
+9. 整理 `dify-rag-lab/docs/01-chat-assistant/api.md`
+10. 在 `dify-rag-lab/docs/00-overview/learning-plan.md` 中勾选已完成项

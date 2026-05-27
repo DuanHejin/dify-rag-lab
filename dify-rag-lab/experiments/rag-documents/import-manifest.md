@@ -13,11 +13,11 @@
 
 | 文件 | 主题 | 用途 |
 | --- | --- | --- |
-| `dify-rag-lab/docs/chat-assistant-api.md` | Chat Assistant 阶段实验记录 | 检索 API、streaming、多轮、发布机制、模型参数实验 |
-| `dify-rag-lab/docs/dify-learning-plan.md` | 总学习计划 | 检索阶段路线、完成状态和后续计划 |
-| `dify-rag-lab/docs/dify-thread-context.md` | 线程上下文 | 检索项目背景、环境状态、和 Super Agent Console 的对照目标 |
-| `dify-rag-lab/docs/knowledge-rag-plan.md` | RAG 学习计划 | 检索知识库阶段的执行步骤和验收标准 |
-| `dify-rag-lab/docs/knowledge-rag-config-notes.md` | RAG 配置项说明 | 检索分段、清洗、索引方式、检索方式、Top K、Score 阈值等配置解释 |
+| `dify-rag-lab/docs/01-chat-assistant/api.md` | Chat Assistant 阶段实验记录 | 检索 API、streaming、多轮、发布机制、模型参数实验 |
+| `dify-rag-lab/docs/00-overview/learning-plan.md` | 总学习计划 | 检索阶段路线、完成状态和后续计划 |
+| `dify-rag-lab/docs/00-overview/thread-context.md` | 线程上下文 | 检索项目背景、环境状态、和 Super Agent Console 的对照目标 |
+| `dify-rag-lab/docs/02-knowledge-rag/plan.md` | RAG 学习计划 | 检索知识库阶段的执行步骤和验收标准 |
+| `dify-rag-lab/docs/02-knowledge-rag/config-notes.md` | RAG 配置项说明 | 检索分段、清洗、索引方式、检索方式、Top K、Score 阈值等配置解释 |
 
 ## 可选导入文档
 

@@ -38,7 +38,7 @@
 
 建议产出：
 
-- [x] `dify-rag-lab/docs/chat-assistant-api.md`
+- [x] `dify-rag-lab/docs/01-chat-assistant/api.md`
 
 ## 阶段 2：Text Generator
 
@@ -86,8 +86,8 @@
 
 建议产出：
 
-- [ ] `dify-rag-lab/docs/knowledge-rag.md`
-- [ ] `dify-rag-lab/docs/knowledge-rag-plan.md`
+- [x] `dify-rag-lab/docs/02-knowledge-rag/lab.md`
+- [x] `dify-rag-lab/docs/02-knowledge-rag/plan.md`
 
 ## 阶段 4：Workflow
 
@@ -119,18 +119,18 @@
 
 目标：理解带会话能力的可视化流程，以及它和 Workflow、Chat Assistant 的关系。
 
-- [ ] 创建一个 Chatflow 应用
-- [ ] 配置用户输入节点
-- [ ] 接入知识库检索节点
-- [ ] 接入 LLM 节点
-- [ ] 接入 Answer 节点
-- [ ] 在控制台验证单轮对话
+- [x] 创建一个 Chatflow 应用
+- [x] 配置用户输入节点
+- [x] 接入知识库检索节点
+- [x] 接入 LLM 节点
+- [x] 接入 Answer 节点
+- [x] 在控制台验证单轮对话
 - [ ] 在控制台验证多轮对话
-- [ ] 生成该应用的 API Key
-- [ ] 用 curl 验证 blocking 返回
-- [ ] 用 curl 验证 streaming 返回
-- [ ] 用 curl 验证 `conversation_id` 多轮对话
-- [ ] 记录 Chatflow 的 API 路径、请求体、响应关键字段、streaming event 类型
+- [x] 生成该应用的 API Key
+- [x] 用 curl 验证 blocking 返回
+- [x] 用 curl 验证 streaming 返回
+- [x] 用 curl 验证 `conversation_id` 多轮对话
+- [x] 记录 Chatflow 的 API 路径、请求体、响应关键字段、streaming event 类型
 
 和 Super Agent Console 对照：
 
@@ -140,8 +140,8 @@
 
 建议产出：
 
-- [ ] `dify-rag-lab/docs/chatflow-api.md`
-- [ ] `dify-rag-lab/docs/chatflow-plan.md`
+- [x] `dify-rag-lab/docs/03-chatflow/api.md`
+- [x] `dify-rag-lab/docs/03-chatflow/plan.md`
 
 ## 阶段 6：Agent + Tool
 

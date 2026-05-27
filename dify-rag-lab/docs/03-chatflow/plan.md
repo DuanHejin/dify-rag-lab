@@ -6,11 +6,11 @@
 
 ## 1. 学习目标
 
-- [ ] 理解 Chatflow 和 Chat Assistant 的区别
+- [x] 理解 Chatflow 和 Chat Assistant 的区别
 - [ ] 理解 Chatflow 和 Workflow 的区别
-- [ ] 理解 Chatflow 中每个节点的输入、输出和变量引用
-- [ ] 验证 Chatflow 如何接入知识库做 RAG
-- [ ] 验证 Chatflow API 的 blocking、streaming 和多轮会话
+- [x] 理解 Chatflow 中每个节点的输入、输出和变量引用
+- [x] 验证 Chatflow 如何接入知识库做 RAG
+- [x] 验证 Chatflow API 的 blocking、streaming 和多轮会话
 - [ ] 记录 Chatflow 与自研 Conversation + Workflow + RAG 的概念对照
 
 ## 2. 准备工作
@@ -38,12 +38,12 @@ Rerank：Jina reranker-v3
 
 目标：创建一个最小可运行的 Chatflow。
 
-- [ ] 在 Dify 控制台创建 Chatflow 应用
-- [ ] 应用命名，例如：`RAG 学习记录 Chatflow`
-- [ ] 选择或配置豆包模型
-- [ ] 进入 Chatflow 编排画布
-- [ ] 观察默认节点结构
-- [ ] 记录 Chatflow 默认入口节点和结束节点
+- [x] 在 Dify 控制台创建 Chatflow 应用
+- [x] 应用命名，例如：`RAG 学习记录 Chatflow`
+- [x] 选择或配置豆包模型
+- [x] 进入 Chatflow 编排画布
+- [x] 观察默认节点结构
+- [x] 记录 Chatflow 默认入口节点和结束节点
 
 记录项：
 
@@ -58,13 +58,13 @@ Rerank：Jina reranker-v3
 
 目标：先不接知识库，只跑通用户输入到 LLM 再到 Answer 的基础链路。
 
-- [ ] 确认 Start / 用户输入节点
-- [ ] 添加或确认 LLM 节点
-- [ ] 在 LLM 节点中引用用户输入变量
-- [ ] 添加或确认 Answer 节点
-- [ ] 将 LLM 输出连接到 Answer
-- [ ] 在调试预览中提问一个普通问题
-- [ ] 验证 Chatflow 能正常回答
+- [x] 确认 Start / 用户输入节点
+- [x] 添加或确认 LLM 节点
+- [x] 在 LLM 节点中引用用户输入变量
+- [x] 添加或确认 Answer 节点
+- [x] 将 LLM 输出连接到 Answer
+- [x] 在调试预览中提问一个普通问题
+- [x] 验证 Chatflow 能正常回答
 
 建议测试问题：
 
@@ -84,14 +84,14 @@ Answer 输出变量：
 
 目标：把 RAG 从 Chat Assistant 的黑盒配置拆成可视化节点。
 
-- [ ] 添加知识检索 / Knowledge Retrieval 节点
-- [ ] 绑定知识库：`dify学习知识库`
-- [ ] 配置检索方式：混合检索
-- [ ] 配置 Rerank：Jina reranker-v3
-- [ ] 配置 Top K
-- [ ] 配置 Score 阈值：先关闭
-- [ ] 确认检索节点输入来自用户问题
-- [ ] 确认检索节点输出变量名称
+- [x] 添加知识检索 / Knowledge Retrieval 节点
+- [x] 绑定知识库：`dify学习知识库`
+- [x] 配置检索方式：混合检索
+- [x] 配置 Rerank：Jina reranker-v3
+- [x] 配置 Top K
+- [x] 配置 Score 阈值：先关闭
+- [x] 确认检索节点输入来自用户问题
+- [x] 确认检索节点输出变量名称
 
 建议配置：
 
@@ -112,13 +112,13 @@ Score 阈值：关闭
 
 目标：让 LLM 基于知识检索结果回答，而不是只靠模型自身知识。
 
-- [ ] 修改 LLM Prompt
-- [ ] 引用用户问题变量
-- [ ] 引用知识检索节点输出
-- [ ] 要求优先基于知识库回答
-- [ ] 要求知识库无关时明确说明未找到相关资料
-- [ ] 调试知识库相关问题
-- [ ] 调试知识库无关问题
+- [x] 修改 LLM Prompt
+- [x] 引用用户问题变量
+- [x] 引用知识检索节点输出
+- [x] 要求优先基于知识库回答
+- [x] 要求知识库无关时明确说明未找到相关资料
+- [x] 调试知识库相关问题
+- [x] 调试知识库无关问题
 
 建议 Prompt 规则：
 
@@ -147,12 +147,12 @@ Dify 最小镜像升级流程是什么？
 
 目标：在页面中验证 Chatflow 的节点执行过程。
 
-- [ ] 单轮提问知识库相关问题
-- [ ] 验证知识检索节点命中正确文档
-- [ ] 验证 LLM 节点使用了检索结果
-- [ ] 验证 Answer 节点输出最终回答
-- [ ] 单轮提问无关问题
-- [ ] 验证无关问题不会强行引用知识库
+- [x] 单轮提问知识库相关问题
+- [x] 验证知识检索节点命中正确文档
+- [x] 验证 LLM 节点使用了检索结果
+- [x] 验证 Answer 节点输出最终回答
+- [x] 单轮提问无关问题
+- [x] 验证无关问题不会强行引用知识库
 - [ ] 多轮对话中继续追问
 - [ ] 观察 Chatflow 是否保留会话上下文
 
@@ -170,11 +170,11 @@ Dify 最小镜像升级流程是什么？
 
 目标：让 Chatflow 可以通过 API 调用。
 
-- [ ] 发布 Chatflow 应用
-- [ ] 生成 API Key
-- [ ] 记录 API Base URL
-- [ ] 记录应用访问方式
-- [ ] 确认发布后配置生效
+- [x] 发布 Chatflow 应用
+- [x] 生成 API Key
+- [x] 记录 API Base URL
+- [x] 记录应用访问方式
+- [x] 确认发布后配置生效
 
 记录项：
 
@@ -188,12 +188,12 @@ API Key 名称：
 
 目标：用 API 验证 Chatflow 的同步返回。
 
-- [ ] 使用 `/v1/chat-messages` blocking 调用知识库相关问题
-- [ ] 验证返回 answer
-- [ ] 观察 `metadata.retriever_resources`
-- [ ] 记录命中文档和片段
-- [ ] 调用无关问题
-- [ ] 验证无关问题的 `retriever_resources` 表现
+- [x] 使用 `/v1/chat-messages` blocking 调用问题
+- [x] 验证返回 answer
+- [x] 观察 `metadata.retriever_resources`
+- [x] 记录命中文档和片段
+- [x] 调用无关问题
+- [x] 验证无关问题的 `retriever_resources` 表现
 
 请求模板：
 
@@ -214,11 +214,11 @@ curl --location --request POST 'http://localhost:8080/v1/chat-messages' \
 
 目标：验证 Chatflow 流式事件。
 
-- [ ] 使用 `/v1/chat-messages` streaming 调用知识库相关问题
-- [ ] 记录 `event=message`
-- [ ] 记录 `event=message_end`
-- [ ] 验证 `retriever_resources` 出现在哪个事件中
-- [ ] 记录 usage 字段
+- [x] 使用 `/v1/chat-messages` streaming 调用问题
+- [x] 记录 `event=message`
+- [x] 记录 `event=message_end`
+- [x] 验证 `retriever_resources` 出现在哪个事件中
+- [x] 记录 usage 字段
 
 重点观察：
 
@@ -232,31 +232,31 @@ Chatflow 是否有节点级事件？
 
 目标：验证 Chatflow 的 `conversation_id` 多轮上下文。
 
-- [ ] 第一次请求不传 `conversation_id`
-- [ ] 从响应中记录 `conversation_id`
-- [ ] 第二次请求带上同一个 `conversation_id`
-- [ ] 追问“这个流程里最容易出错的是哪一步？”
-- [ ] 验证是否能结合上一轮问题继续回答
+- [x] 第一次请求不传 `conversation_id`
+- [x] 从响应中记录 `conversation_id`
+- [x] 第二次请求带上同一个 `conversation_id`
+- [x] 追问上一轮回答中的局部内容
+- [x] 验证是否能结合上一轮问题继续回答
 
 ## 12. 日志与监测
 
 目标：观察 Chatflow 的运行记录。
 
-- [ ] 在日志与标注中查看 Chatflow 对话
-- [ ] 查看节点执行过程或 trace
-- [ ] 查看知识库引用
-- [ ] 查看 token 用量
-- [ ] 查看延迟
+- [x] 在日志与标注中查看 Chatflow 对话
+- [x] 查看节点执行过程或 trace
+- [x] 查看知识库引用
+- [x] 查看 token 用量
+- [x] 查看延迟
 - [ ] 在监测页面观察调用数据
 
 ## 13. 和其他应用形态对照
 
 目标：明确 Chatflow 的定位。
 
-- [ ] 对照 Chat Assistant：配置简单，但链路较黑盒
-- [ ] 对照 Workflow：可视化编排，但 Workflow 偏一次性流程
-- [ ] 对照 Chatflow：可视化编排 + 会话能力 + 可接知识库
-- [ ] 对照自研 Super Agent Console：Conversation + AgentRun + Retrieval + Workflow
+- [x] 对照 Chat Assistant：配置简单，但链路较黑盒
+- [x] 对照 Workflow：可视化编排，但 Workflow 偏一次性流程
+- [x] 对照 Chatflow：可视化编排 + 会话能力 + 可接知识库
+- [x] 对照自研 Super Agent Console：Conversation + AgentRun + Retrieval + Workflow
 
 对照记录：
 
@@ -269,20 +269,20 @@ Chatflow：适合可控、可解释的多轮聊天编排
 
 ## 14. 阶段产出
 
-- [ ] 完成 `dify-rag-lab/docs/chatflow-api.md`
-- [ ] 保存 Chatflow blocking curl 示例
-- [ ] 保存 Chatflow streaming curl 示例
-- [ ] 保存 Chatflow 多轮会话示例
-- [ ] 保存 Chatflow RAG 命中样例
-- [ ] 更新 `dify-rag-lab/docs/dify-learning-plan.md`
+- [x] 完成 `dify-rag-lab/docs/03-chatflow/api.md`
+- [x] 保存 Chatflow blocking curl 示例
+- [x] 保存 Chatflow streaming curl 示例
+- [x] 保存 Chatflow 多轮会话示例
+- [x] 保存 Chatflow RAG 命中样例
+- [x] 更新 `dify-rag-lab/docs/00-overview/learning-plan.md`
 
 ## 15. 阶段完成标准
 
-- [ ] 至少创建 1 个 Chatflow 应用
-- [ ] 至少包含用户输入、知识检索、LLM、Answer 节点
-- [ ] 页面调试能回答知识库相关问题
-- [ ] 页面调试能处理无关问题
-- [ ] API blocking 调用成功
-- [ ] API streaming 调用成功
-- [ ] 多轮 `conversation_id` 验证成功
-- [ ] 能说清 Chatflow 与 Chat Assistant / Workflow 的区别
+- [x] 至少创建 1 个 Chatflow 应用
+- [x] 至少包含用户输入、知识检索、LLM、Answer 节点
+- [x] 页面调试能回答知识库相关问题
+- [x] 页面调试能处理无关问题
+- [x] API blocking 调用成功
+- [x] API streaming 调用成功
+- [x] 多轮 `conversation_id` 验证成功
+- [x] 能说清 Chatflow 与 Chat Assistant / Workflow 的区别

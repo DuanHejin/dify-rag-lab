@@ -17,4 +17,4 @@
 - 不把个人文档放进 Dify 官方 `docs/` 目录，避免和上游内容混在一起。
 - 真正需要二开源码时，可以修改仓库原有的 `api/`、`web/`、`docker/` 等目录，但设计说明、验证记录和实验材料仍放在本目录。
 - 新增文档优先放到 `dify-rag-lab/docs/`，新增脚本优先放到 `dify-rag-lab/scripts/`。
-- 后续 Codex 线程应先阅读 `dify-rag-lab/docs/dify-thread-context.md` 和 `dify-rag-lab/docs/dify-learning-plan.md`。
+- 后续 Codex 线程应先阅读 `dify-rag-lab/docs/README.md`、`dify-rag-lab/docs/00-overview/thread-context.md` 和 `dify-rag-lab/docs/00-overview/learning-plan.md`。

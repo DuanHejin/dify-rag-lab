@@ -12,20 +12,22 @@
 
 ## 2. 导入文档
 
+注意：下表路径是当前本地整理后的文档路径；Dify 知识库里已经导入的 `document_name` 仍可能保留整理前的原始文件名。
+
 | 文件 | chunk 数 | 状态 |
 | --- | ---: | --- |
-| `dify-rag-lab/docs/knowledge-rag-config-notes.md` | 169 | 可用 |
-| `dify-rag-lab/docs/chat-assistant-api.md` | 66 | 可用 |
-| `dify-rag-lab/docs/dify-learning-plan.md` | 47 | 可用 |
-| `dify-rag-lab/docs/knowledge-rag-plan.md` | 40 | 可用 |
-| `dify-rag-lab/docs/dify-thread-context.md` | 104 | 可用 |
+| `dify-rag-lab/docs/02-knowledge-rag/config-notes.md` | 169 | 可用 |
+| `dify-rag-lab/docs/01-chat-assistant/api.md` | 66 | 可用 |
+| `dify-rag-lab/docs/00-overview/learning-plan.md` | 47 | 可用 |
+| `dify-rag-lab/docs/02-knowledge-rag/plan.md` | 40 | 可用 |
+| `dify-rag-lab/docs/00-overview/thread-context.md` | 104 | 可用 |
 
 ## 3. 初步观察
 
 - 5 个真实学习文档均已导入成功。
 - 文档状态全部可用，说明 Embedding 模型和向量库链路可用。
-- `knowledge-rag-config-notes.md` chunk 数最多，达到 169，符合该文档配置解释内容较长、标题层级较多的特点。
-- `knowledge-rag-plan.md` chunk 数最少，为 40，适合作为结构化计划类文档检索样本。
+- `02-knowledge-rag/config-notes.md` chunk 数最多，达到 169，符合该文档配置解释内容较长、标题层级较多的特点。
+- `02-knowledge-rag/plan.md` chunk 数最少，为 40，适合作为结构化计划类文档检索样本。
 - 后续需要继续观察是否存在过多短 chunk、标题和正文分离、代码块被切碎等问题。
 
 ## 4. 待检索问题
@@ -62,7 +64,7 @@ Top K 设置为 3 代表什么？
 
 预期：
 
-- 命中 `dify-rag-lab/docs/knowledge-rag-config-notes.md`
+- 命中 `dify-rag-lab/docs/02-knowledge-rag/config-notes.md`
 - 命中关于 `Top K = 3` 的配置说明
 
 实际结果：

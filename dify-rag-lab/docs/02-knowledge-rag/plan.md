@@ -18,11 +18,11 @@
 目标：直接使用 `dify-rag-lab/docs/` 下的真实学习文档作为知识库材料，让 RAG 检索能够服务后续学习复盘，而不是只验证临时样例文本。
 
 - [x] 创建导入清单：`dify-rag-lab/experiments/rag-documents/import-manifest.md`
-- [x] 导入真实文档 1：`dify-rag-lab/docs/chat-assistant-api.md`
-- [x] 导入真实文档 2：`dify-rag-lab/docs/dify-learning-plan.md`
-- [x] 导入真实文档 3：`dify-rag-lab/docs/dify-thread-context.md`
-- [x] 导入真实文档 4：`dify-rag-lab/docs/knowledge-rag-plan.md`
-- [x] 导入真实文档 5：`dify-rag-lab/docs/knowledge-rag-config-notes.md`
+- [x] 导入真实文档 1：`dify-rag-lab/docs/01-chat-assistant/api.md`
+- [x] 导入真实文档 2：`dify-rag-lab/docs/00-overview/learning-plan.md`
+- [x] 导入真实文档 3：`dify-rag-lab/docs/00-overview/thread-context.md`
+- [x] 导入真实文档 4：`dify-rag-lab/docs/02-knowledge-rag/plan.md`
+- [x] 导入真实文档 5：`dify-rag-lab/docs/02-knowledge-rag/config-notes.md`
 - [ ] 可选导入 Prompt 实验文档：`dify-rag-lab/experiments/prompts/chat-assistant-prompts.md`
 - [x] 记录每个导入文档的主题、chunk 数量和索引状态
 
@@ -212,11 +212,11 @@ stage: job_prepare
 
 ## 11. 阶段产出
 
-- [x] 完成 `dify-rag-lab/docs/knowledge-rag.md`
+- [x] 完成 `dify-rag-lab/docs/02-knowledge-rag/lab.md`
 - [x] 保存 RAG API curl 示例
 - [x] 保存检索命中样例
 - [x] 记录元数据过滤当前页面未找到入口，后续在 Chatflow / Workflow 再确认
-- [x] 更新 `dify-rag-lab/docs/dify-learning-plan.md`
+- [x] 更新 `dify-rag-lab/docs/00-overview/learning-plan.md`
 
 ## 12. 阶段完成标准
 

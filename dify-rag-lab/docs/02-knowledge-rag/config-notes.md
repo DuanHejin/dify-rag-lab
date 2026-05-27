@@ -267,7 +267,7 @@ Input tag 'None' found using 'enable' does not match any of the expected tags: F
 
 截图中右侧预览显示：
 
-- 文档 `chat-assistant-api.md` 被切成多个 chunk。
+- 文档 `01-chat-assistant/api.md` 被切成多个 chunk。
 - 可以看到每个 chunk 的字符数。
 - 出现了多个很短的 chunk。
 
