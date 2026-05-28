@@ -136,3 +136,93 @@
 - `06-rag-chat-assistant-api/06-rag-chat-assistant-api-image-01.png`
 - `06-rag-chat-assistant-api/06-rag-chat-assistant-api-image-02.png`
 - `06-rag-chat-assistant-api/06-rag-chat-assistant-api-image-03.png`
+
+### 7. 我开始用 Chatflow 重做 RAG 应用，才理解“对话流程”是什么
+
+核心内容：
+
+- 为什么 Chat Assistant 后还要学习 Chatflow
+- 最小 Chatflow：开始、LLM、回复
+- LLM 节点中看到真实 prompts
+- 接入知识检索节点
+- LLM 上下文必须显式引用知识检索结果
+- Chatflow API 仍然是 `/v1/chat-messages`
+- `mode=advanced-chat`
+- streaming 中的 `workflow_started`、`node_started`、`message`、`message_end`
+- `conversation_id` 多轮对话
+
+文件：
+
+- `07-chatflow-rag-v1/07-chatflow-rag-v1.md`
+- `07-chatflow-rag-v1/07-chatflow-rag-v1-zhihu.md`
+- `07-chatflow-rag-v1/07-chatflow-rag-v1-juejin.md`
+- `07-chatflow-rag-v1/07-chatflow-rag-v1-image-01.png`
+- `07-chatflow-rag-v1/07-chatflow-rag-v1-image-02.png`
+- `07-chatflow-rag-v1/07-chatflow-rag-v1-image-03.png`
+
+### 8. 我给 Chatflow 加了 IF/ELSE，才发现 AI 应用不能什么都交给大模型
+
+核心内容：
+
+- 复制 Chatflow RAG V1 为 V2
+- 参数提取节点
+- `structured_output`
+- `intent`、`job_type`、`days`、`weak_points`、`is_complete`
+- `is_complete` 从字段完整判断变成意图与字段共同判断
+- IF / ELIF / ELSE 分支
+- 信息不足分支
+- 无关问题兜底
+- 用户补充信息后会重新从 Start 节点执行
+
+文件：
+
+- `08-chatflow-branching-v2/08-chatflow-branching-v2.md`
+- `08-chatflow-branching-v2/08-chatflow-branching-v2-zhihu.md`
+- `08-chatflow-branching-v2/08-chatflow-branching-v2-juejin.md`
+- `08-chatflow-branching-v2/08-chatflow-branching-v2-image-01.png`
+- `08-chatflow-branching-v2/08-chatflow-branching-v2-image-02.png`
+- `08-chatflow-branching-v2/08-chatflow-branching-v2-image-03.png`
+
+### 9. 学完 Chatflow 后，我用 Workflow 做了一个一次性任务编排
+
+核心内容：
+
+- Workflow 和 Chatflow 的入口差异
+- Start 输入变量：`job_type`、`days`、`weak_points`
+- LLM 1：提取准备重点
+- LLM 2：生成准备计划
+- 上游节点 `text` 传给下游节点
+- End 节点决定最终输出
+- 单节点调试和全链路调试的差异
+- `<think>` 标签在页面中的折叠展示
+
+文件：
+
+- `09-workflow-basic/09-workflow-basic.md`
+- `09-workflow-basic/09-workflow-basic-zhihu.md`
+- `09-workflow-basic/09-workflow-basic-juejin.md`
+- `09-workflow-basic/09-workflow-basic-image-01.png`
+- `09-workflow-basic/09-workflow-basic-image-02.png`
+- `09-workflow-basic/09-workflow-basic-image-03.png`
+
+### 10. 调完 Workflow API 后，我才看清它和 Chatflow 的真正区别
+
+核心内容：
+
+- Workflow API：`POST /v1/workflows/run`
+- blocking 请求与 `inputs`
+- blocking 响应中的 `data.outputs.answer`
+- streaming 事件：`workflow_started`、`node_started`、`text_chunk`、`workflow_finished`
+- `text_chunk` 和 Chatflow `message` 的区别
+- Workflow 日志的结果、详情、追踪
+- Workflow 日志看执行过程，Chatflow 日志看对话结果
+- 对自研 AgentEvent / Run Detail 的启发
+
+文件：
+
+- `10-workflow-api-logs/10-workflow-api-logs.md`
+- `10-workflow-api-logs/10-workflow-api-logs-zhihu.md`
+- `10-workflow-api-logs/10-workflow-api-logs-juejin.md`
+- `10-workflow-api-logs/10-workflow-api-logs-image-01.png`
+- `10-workflow-api-logs/10-workflow-api-logs-image-02.png`
+- `10-workflow-api-logs/10-workflow-api-logs-image-03.png`
