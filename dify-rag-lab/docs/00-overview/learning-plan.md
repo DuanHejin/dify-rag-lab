@@ -93,17 +93,17 @@
 
 目标：理解 Dify 的低代码工作流如何编排多个节点。
 
-- [ ] 创建一个 Workflow 应用
-- [ ] 添加输入变量，例如 `jd_text`
-- [ ] 添加第一个 LLM 节点：提取岗位要求
-- [ ] 添加第二个 LLM 节点：生成 3 天准备计划
-- [ ] 配置节点之间的变量引用
-- [ ] 配置 End 节点输出
-- [ ] 在控制台验证工作流执行
-- [ ] 生成该应用的 API Key
-- [ ] 用 curl 验证 blocking 返回
-- [ ] 用 curl 验证 streaming 返回
-- [ ] 记录 workflow 节点执行结果和 streaming event 类型
+- [x] 创建一个 Workflow 应用
+- [x] 添加输入变量，例如 `job_type`、`days`、`weak_points`
+- [x] 添加第一个 LLM 节点：提取准备重点
+- [x] 添加第二个 LLM 节点：生成准备计划
+- [x] 配置节点之间的变量引用
+- [x] 配置 End 节点输出
+- [x] 在控制台验证工作流执行
+- [x] 生成该应用的 API Key
+- [x] 用 curl 验证 blocking 返回
+- [x] 用 curl 验证 streaming 返回
+- [x] 记录 workflow 节点执行结果和 streaming event 类型
 
 和 Super Agent Console 对照：
 
@@ -113,7 +113,8 @@
 
 建议产出：
 
-- [ ] `dify-rag-lab/docs/workflow-api.md`
+- [x] `dify-rag-lab/docs/04-workflow/plan.md`
+- [x] `dify-rag-lab/docs/04-workflow/api.md`
 
 ## 阶段 5：Chatflow
 

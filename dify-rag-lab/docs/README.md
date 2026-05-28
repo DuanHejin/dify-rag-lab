@@ -35,6 +35,9 @@ docs/
 ├── 03-chatflow/
 │   ├── plan.md
 │   └── api.md
+├── 04-workflow/
+│   ├── plan.md
+│   └── api.md
 └── public-articles/
     └── dify-rag-series/
 ```
@@ -62,15 +65,16 @@ docs/
 - `plan.md`：Chatflow 阶段学习计划。
 - `api.md`：Chatflow blocking、streaming、多轮、RAG、节点事件、日志观测记录。
 
+### 04-workflow
+
+- `plan.md`：Workflow 阶段学习计划，记录输入变量、节点传递、End 输出和 API 验证。
+- `api.md`：Workflow blocking / streaming API 验证记录，以及和 Chatflow API 的差异。
+
 ## 后续扩展建议
 
-后续继续学习 Workflow、Agent / Tool、MCP 时，按同样规则新增：
+后续继续学习 Agent / Tool、MCP 时，按同样规则新增：
 
 ```text
-04-workflow/
-├── plan.md
-└── api.md
-
 05-agent-tool/
 ├── plan.md
 └── api.md
