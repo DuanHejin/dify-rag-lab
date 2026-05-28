@@ -4,6 +4,8 @@
 
 ## 系列文章规划
 
+目录结构：每篇文章单独一个目录，目录内包含公众号、知乎、掘金三个版本，以及三张配图。配图统一命名为 `{文章编号和主题}-image-01.png` 到 `{文章编号和主题}-image-03.png`。
+
 ### 1. 做完自己的 Agent 项目后，我为什么开始学习 Dify？
 
 核心内容：
@@ -20,9 +22,12 @@
 
 文件：
 
-- `01-dify-local-deploy.md`
-- `01-dify-local-deploy-zhihu.md`
-- `01-dify-local-deploy-juejin.md`
+- `01-dify-local-deploy/01-dify-local-deploy.md`
+- `01-dify-local-deploy/01-dify-local-deploy-zhihu.md`
+- `01-dify-local-deploy/01-dify-local-deploy-juejin.md`
+- `01-dify-local-deploy/01-dify-local-deploy-image-01.png`
+- `01-dify-local-deploy/01-dify-local-deploy-image-02.png`
+- `01-dify-local-deploy/01-dify-local-deploy-image-03.png`
 
 ### 2. Dify Chat Assistant 入门：从页面调试到 API 调用
 
@@ -40,9 +45,12 @@
 
 文件：
 
-- `02-chat-assistant.md`
-- `02-chat-assistant-zhihu.md`
-- `02-chat-assistant-juejin.md`
+- `02-chat-assistant/02-chat-assistant.md`
+- `02-chat-assistant/02-chat-assistant-zhihu.md`
+- `02-chat-assistant/02-chat-assistant-juejin.md`
+- `02-chat-assistant/02-chat-assistant-image-01.png`
+- `02-chat-assistant/02-chat-assistant-image-02.png`
+- `02-chat-assistant/02-chat-assistant-image-03.png`
 
 ### 3. Dify 知识库 RAG 实战：从 Markdown 导入到第一次召回
 
@@ -58,9 +66,12 @@
 
 文件：
 
-- `03-knowledge-rag-first-retrieval.md`
-- `03-knowledge-rag-first-retrieval-zhihu.md`
-- `03-knowledge-rag-first-retrieval-juejin.md`
+- `03-knowledge-rag-first-retrieval/03-knowledge-rag-first-retrieval.md`
+- `03-knowledge-rag-first-retrieval/03-knowledge-rag-first-retrieval-zhihu.md`
+- `03-knowledge-rag-first-retrieval/03-knowledge-rag-first-retrieval-juejin.md`
+- `03-knowledge-rag-first-retrieval/03-knowledge-rag-first-retrieval-image-01.png`
+- `03-knowledge-rag-first-retrieval/03-knowledge-rag-first-retrieval-image-02.png`
+- `03-knowledge-rag-first-retrieval/03-knowledge-rag-first-retrieval-image-03.png`
 
 ### 4. Dify RAG 踩坑实录：为什么我的知识库明明可用，却搜不出来
 
@@ -76,9 +87,12 @@
 
 文件：
 
-- `04-rag-troubleshooting.md`
-- `04-rag-troubleshooting-zhihu.md`
-- `04-rag-troubleshooting-juejin.md`
+- `04-rag-troubleshooting/04-rag-troubleshooting.md`
+- `04-rag-troubleshooting/04-rag-troubleshooting-zhihu.md`
+- `04-rag-troubleshooting/04-rag-troubleshooting-juejin.md`
+- `04-rag-troubleshooting/04-rag-troubleshooting-image-01.png`
+- `04-rag-troubleshooting/04-rag-troubleshooting-image-02.png`
+- `04-rag-troubleshooting/04-rag-troubleshooting-image-03.png`
 
 ### 5. RAG 效果优化：分段、Top K、Rerank 到底怎么调
 
@@ -95,9 +109,12 @@
 
 文件：
 
-- `05-rag-optimization.md`
-- `05-rag-optimization-zhihu.md`
-- `05-rag-optimization-juejin.md`
+- `05-rag-optimization/05-rag-optimization.md`
+- `05-rag-optimization/05-rag-optimization-zhihu.md`
+- `05-rag-optimization/05-rag-optimization-juejin.md`
+- `05-rag-optimization/05-rag-optimization-image-01.png`
+- `05-rag-optimization/05-rag-optimization-image-02.png`
+- `05-rag-optimization/05-rag-optimization-image-03.png`
 
 ### 6. 把 RAG 接进应用：Chat Assistant + 知识库 + API 完整验证
 
@@ -113,6 +130,9 @@
 
 文件：
 
-- `06-rag-chat-assistant-api.md`
-- `06-rag-chat-assistant-api-zhihu.md`
-- `06-rag-chat-assistant-api-juejin.md`
+- `06-rag-chat-assistant-api/06-rag-chat-assistant-api.md`
+- `06-rag-chat-assistant-api/06-rag-chat-assistant-api-zhihu.md`
+- `06-rag-chat-assistant-api/06-rag-chat-assistant-api-juejin.md`
+- `06-rag-chat-assistant-api/06-rag-chat-assistant-api-image-01.png`
+- `06-rag-chat-assistant-api/06-rag-chat-assistant-api-image-02.png`
+- `06-rag-chat-assistant-api/06-rag-chat-assistant-api-image-03.png`
