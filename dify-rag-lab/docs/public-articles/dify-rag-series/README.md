@@ -6,6 +6,8 @@
 
 目录结构：每篇文章单独一个目录，目录内包含公众号、知乎、掘金三个版本，以及三张配图。配图统一命名为 `{文章编号和主题}-image-01.png` 到 `{文章编号和主题}-image-03.png`。
 
+生成规则：文章内容由 Codex 生成；配图统一走 GPT 生成，保持和前文一致的图片风格，不使用 Codex 图片生成。
+
 ### 1. 做完自己的 Agent 项目后，我为什么开始学习 Dify？
 
 核心内容：
@@ -226,3 +228,27 @@
 - `10-workflow-api-logs/10-workflow-api-logs-image-01.png`
 - `10-workflow-api-logs/10-workflow-api-logs-image-02.png`
 - `10-workflow-api-logs/10-workflow-api-logs-image-03.png`
+
+### 11. 我给 Dify Agent 接了一个 Tool，终于看到它是怎么“动手”的
+
+核心内容：
+
+- 创建“求职助手 Agent Tool”
+- Agent mode：Function calling
+- 自定义 OpenAPI Tool：`get_job_profile`
+- 本机 mock 服务与 `host.docker.internal`
+- Agent Chat App 不支持 blocking mode
+- streaming 事件：`agent_thought`、`agent_message`、`message_end`
+- `agent_thought.tool`、`tool_input`、`observation`
+- 预览 / 日志详情追踪中的 LLM -> Tool -> LLM
+- Tool 不可用、未知岗位 fallback、Prompt 约束边界
+- Dify Tool 与 SuperAgentConsole Tool Router / Tool Handler / AgentEvent 对照
+
+文件：
+
+- `11-agent-tool/11-agent-tool.md`
+- `11-agent-tool/11-agent-tool-zhihu.md`
+- `11-agent-tool/11-agent-tool-juejin.md`
+- `11-agent-tool/11-agent-tool-image-01.png`
+- `11-agent-tool/11-agent-tool-image-02.png`
+- `11-agent-tool/11-agent-tool-image-03.png`
