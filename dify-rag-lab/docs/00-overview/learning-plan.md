@@ -150,18 +150,18 @@
 
 目标：验证 Dify Agent 如何选择并调用工具。
 
-- [ ] 创建一个 Agent 应用
-- [ ] 选择豆包模型
-- [ ] 注册一个简单 HTTP Tool 或 mock Tool
-- [ ] 为 Tool 配置名称、描述、参数 schema
-- [ ] 编写 Prompt，让模型在合适场景下调用 Tool
-- [ ] 在控制台验证 Tool 调用
-- [ ] 观察 Tool 输入、Tool 输出和最终回答
-- [ ] 生成该应用的 API Key
-- [ ] 用 curl 验证 blocking 返回
-- [ ] 用 curl 验证 streaming 返回
-- [ ] 用 curl 验证 agent tool 调用结果
-- [ ] 记录 Agent 应用的 API 路径、请求体、响应关键字段、streaming event 类型
+- [x] 创建一个 Agent 应用
+- [x] 选择豆包模型
+- [x] 注册一个简单 HTTP Tool 或 mock Tool
+- [x] 为 Tool 配置名称、描述、参数 schema
+- [x] 编写 Prompt，让模型在合适场景下调用 Tool
+- [x] 在控制台验证 Tool 调用
+- [x] 观察 Tool 输入、Tool 输出和最终回答
+- [x] 生成该应用的 API Key
+- [x] 用 curl 验证 blocking 返回
+- [x] 用 curl 验证 streaming 返回
+- [x] 用 curl 验证 agent tool 调用结果
+- [x] 记录 Agent 应用的 API 路径、请求体、响应关键字段、streaming event 类型
 
 和 Super Agent Console 对照：
 
@@ -171,7 +171,8 @@
 
 建议产出：
 
-- [ ] `dify-rag-lab/docs/agent-tool-api.md`
+- [x] `dify-rag-lab/docs/05-agent-tool/plan.md`
+- [x] `dify-rag-lab/docs/05-agent-tool/api.md`
 
 ## 阶段 7：API 汇总
 
