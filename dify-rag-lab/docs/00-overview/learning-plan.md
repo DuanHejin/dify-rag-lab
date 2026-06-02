@@ -174,7 +174,32 @@
 - [x] `dify-rag-lab/docs/05-agent-tool/plan.md`
 - [x] `dify-rag-lab/docs/05-agent-tool/api.md`
 
-## 阶段 7：API 汇总
+## 阶段 7：MCP
+
+目标：理解 MCP 和普通 Tool / API Tool 的区别，验证 Dify 中 MCP 能力的使用方式。
+
+- [x] 理解 MCP 是什么
+- [x] 理解 MCP Server / MCP Client 的关系
+- [ ] 理解 MCP Tool、Resource、Prompt 的区别
+- [ ] 区分 MCP 和 Dify 自定义 API Tool
+- [x] 找到 Dify 中 MCP 相关入口
+- [x] 记录 MCP 页面配置项
+- [x] 设计最小 MCP Tool 实验
+- [x] 尝试将 Dify 应用作为 MCP Server 暴露给外部 MCP Client
+- [x] 使用 Codex 作为 MCP Client 调用 Dify Chatflow MCP 服务
+- [ ] 尝试在 Dify 中连接外部 MCP Server
+- [ ] 尝试让 Agent 调用外部 MCP Tool
+- [x] 用 API / 日志观察 MCP 调用过程
+- [ ] 对照 MCP 与 Super Agent Console 的 Tool Router / Tool Handler / AgentEvent
+
+建议产出：
+
+- [x] `dify-rag-lab/docs/06-mcp/plan.md`
+- [ ] `dify-rag-lab/docs/06-mcp/api.md`
+- [x] `dify-rag-lab/docs/06-mcp/lab.md`
+- [x] `dify-rag-lab/docs/06-mcp/config-notes.md`
+
+## 阶段 8：API 汇总
 
 目标：把所有应用的 API 调用方式整理成可复用手册。
 
@@ -194,7 +219,7 @@
 
 - [ ] `dify-rag-lab/docs/dify-api-curl-cases.md`
 
-## 阶段 8：Dify 与 Super Agent Console 对照
+## 阶段 9：Dify 与 Super Agent Console 对照
 
 目标：把 Dify 的低代码平台能力翻译成自研 Agent 项目的工程概念。
 

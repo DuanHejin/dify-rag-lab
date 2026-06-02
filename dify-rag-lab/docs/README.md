@@ -41,6 +41,10 @@ docs/
 ├── 05-agent-tool/
 │   ├── plan.md
 │   └── api.md
+├── 06-mcp/
+│   ├── plan.md
+│   ├── lab.md
+│   └── config-notes.md
 └── public-articles/
     └── dify-rag-series/
 ```
@@ -78,12 +82,19 @@ docs/
 - `plan.md`：Agent + Tool 阶段学习计划，记录 Agent 应用、Tool 设计、工具调用、API 事件和对照关系。
 - `api.md`：Agent streaming API、`agent_thought`、tool input / observation、blocking 限制等验证记录。
 
+### 06-mcp
+
+- `plan.md`：MCP 阶段学习计划，记录 MCP 基础概念、Dify 入口观察、最小 MCP Tool 实验和对照关系。
+- `config-notes.md`：Dify “添加 MCP 服务 (HTTP)”页面的配置项说明。
+- `lab.md`：Dify Chatflow 暴露为 MCP Server、Codex 作为 MCP Client 调用、日志 Trace 观察记录。
+
 ## 后续扩展建议
 
-后续继续学习 Agent / Tool、MCP 时，按同样规则新增：
+后续继续深入 MCP 或其他平台能力时，按同样规则新增：
 
 ```text
 06-mcp/
 ├── plan.md
+├── api.md
 └── lab.md
 ```
