@@ -284,3 +284,24 @@ zip -r rag-docs.zip dify-rag-series
 - `12-mcp-chatflow-server/12-mcp-chatflow-server-image-01.png`
 - `12-mcp-chatflow-server/12-mcp-chatflow-server-image-02.png`
 - `12-mcp-chatflow-server/12-mcp-chatflow-server-image-03.png`
+
+### 13. 学完 Dify 后，我准备换一个角度继续理解 Agent
+
+核心内容：
+
+- Dify 学习阶段收尾
+- 从本地部署、Chat Assistant、RAG、Chatflow、Workflow、Agent Tool 到 MCP 的主线复盘
+- Dify 作为成熟平台视角，SuperAgentConsole 作为自研 Runtime 视角
+- 为什么 API 汇总和 Text Generator 暂时不再展开
+- Dify 与 SuperAgentConsole 的概念对照
+- 下一阶段转向 LangChain / LangGraph
+- 用 Dify、SuperAgentConsole、LangGraph 做三方参照
+
+文件：
+
+- `13-dify-wrap-up/13-dify-wrap-up.md`
+- `13-dify-wrap-up/13-dify-wrap-up-zhihu.md`
+- `13-dify-wrap-up/13-dify-wrap-up-juejin.md`
+- `13-dify-wrap-up/13-dify-wrap-up-image-01.png`
+- `13-dify-wrap-up/13-dify-wrap-up-image-02.png`
+- `13-dify-wrap-up/13-dify-wrap-up-image-03.png`
