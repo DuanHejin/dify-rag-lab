@@ -8,6 +8,12 @@
 
 生成规则：文章内容由 Codex 生成；配图统一走 GPT 生成，保持和前文一致的图片风格，不使用 Codex 图片生成。
 
+配图交接流程：在 `dify-rag-lab/docs/public-articles` 目录下执行以下命令，生成包含全系列文章资料的压缩包，然后把 `rag-docs.zip` 提供给 GPT 作为配图生成上下文。
+
+```bash
+zip -r rag-docs.zip dify-rag-series
+```
+
 ### 1. 做完自己的 Agent 项目后，我为什么开始学习 Dify？
 
 核心内容：
@@ -252,3 +258,29 @@
 - `11-agent-tool/11-agent-tool-image-01.png`
 - `11-agent-tool/11-agent-tool-image-02.png`
 - `11-agent-tool/11-agent-tool-image-03.png`
+
+### 12. 我把 Dify Chatflow 暴露成 MCP 服务，才发现它不是另一套魔法
+
+核心内容：
+
+- Dify 中看到的两个 MCP 入口：接入外部 MCP Server 与应用级 MCP Server
+- 为什么先做应用级 MCP Server，而不是直接写外部 MCP Server
+- 将“求职助手 Chatflow RAG V2”启用 MCP 服务
+- MCP 服务端点与本地 8080 端口
+- `curl` GET 返回 405 的含义
+- Codex 作为 MCP Client 添加 `dify-chatflow-rag-v2`
+- 自动审查模式导致权限审批卡住，默认权限模式下允许后调用成功
+- Dify 日志与标注中能看到本次 MCP 调用
+- Trace 中仍然执行用户输入、参数提取、IF/ELSE、知识检索、LLM、最终返回
+- MCP 是外部标准入口，Chatflow 是内部业务编排
+- MCP Tool / Resource / Prompt 的阶段性理解
+- 暂停外部 MCP Server 实验，把 MCP 放回软件工程的抽象、封装、复用和边界里理解
+
+文件：
+
+- `12-mcp-chatflow-server/12-mcp-chatflow-server.md`
+- `12-mcp-chatflow-server/12-mcp-chatflow-server-zhihu.md`
+- `12-mcp-chatflow-server/12-mcp-chatflow-server-juejin.md`
+- `12-mcp-chatflow-server/12-mcp-chatflow-server-image-01.png`
+- `12-mcp-chatflow-server/12-mcp-chatflow-server-image-02.png`
+- `12-mcp-chatflow-server/12-mcp-chatflow-server-image-03.png`
