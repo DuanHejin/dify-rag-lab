@@ -199,52 +199,45 @@
 - [x] `dify-rag-lab/docs/06-mcp/lab.md`
 - [x] `dify-rag-lab/docs/06-mcp/config-notes.md`
 
-## 阶段 8：API 汇总
+## 阶段 8：API 汇总（暂不单独整理）
 
 目标：把所有应用的 API 调用方式整理成可复用手册。
 
-- [ ] 汇总 Chat Assistant API
-- [ ] 汇总 Text Generator API
-- [ ] 汇总 Workflow API
-- [ ] 汇总 Chatflow API
-- [ ] 汇总 Agent API
-- [ ] 汇总 blocking 请求示例
-- [ ] 汇总 streaming 请求示例
-- [ ] 汇总 `conversation_id` 多轮对话示例
-- [ ] 汇总 workflow 节点事件
-- [ ] 汇总 agent tool 调用事件
-- [ ] 汇总知识库检索回答示例
+当前决策：暂不单独整理 API 汇总文档。Dify 页面已经提供各类应用的 API 说明，后续需要时直接参考平台 API 文档即可。
+
+- [x] 决定不单独维护 API 汇总文档
+- [x] 后续需要时直接参考 Dify 页面内置 API 文档
 
 建议产出：
 
-- [ ] `dify-rag-lab/docs/dify-api-curl-cases.md`
+- [x] 暂不生成 `dify-rag-lab/docs/dify-api-curl-cases.md`
 
 ## 阶段 9：Dify 与 Super Agent Console 对照
 
 目标：把 Dify 的低代码平台能力翻译成自研 Agent 项目的工程概念。
 
-- [ ] 对照 Dify App 与 Super Agent Console Agent Run
-- [ ] 对照 Dify Chat Assistant 与 Conversation / Message / SSE
-- [ ] 对照 Dify Workflow 与 Skill Workflow
-- [ ] 对照 Dify Chatflow 与 Conversation + Workflow + RAG
-- [ ] 对照 Dify Tool 与 Tool Schema / Tool Router
-- [ ] 对照 Dify Knowledge 与未来 RAG 模块
-- [ ] 对照 Dify streaming event 与 AgentEvent
-- [ ] 对照 Dify 日志 / Trace 能力与 Run Detail
-- [ ] 总结 Dify 适合解决什么问题
-- [ ] 总结自研 Super Agent Console 适合展示什么能力
+- [x] 对照 Dify App 与 Super Agent Console Agent Run
+- [x] 对照 Dify Chat Assistant 与 Conversation / Message / SSE
+- [x] 对照 Dify Workflow 与 Skill Workflow
+- [x] 对照 Dify Chatflow 与 Conversation + Workflow + RAG
+- [x] 对照 Dify Tool 与 Tool Schema / Tool Router
+- [x] 对照 Dify Knowledge 与未来 RAG 模块
+- [x] 对照 Dify streaming event 与 AgentEvent
+- [x] 对照 Dify 日志 / Trace 能力与 Run Detail
+- [x] 总结 Dify 适合解决什么问题
+- [x] 总结自研 Super Agent Console 适合展示什么能力
 
 建议产出：
 
-- [ ] `dify-rag-lab/docs/dify-vs-super-agent-console.md`
+- [x] `dify-rag-lab/docs/00-overview/dify-vs-super-agent-console.md`
 
 ## 最终验收清单
 
 - [x] 本地 Dify 可以稳定启动和访问
-- [ ] 至少创建 5 类应用：Text Generator、Chat Assistant、Agent、Workflow、Chatflow
+- [x] 已覆盖核心应用：Chat Assistant、Knowledge / RAG、Chatflow、Workflow、Agent、MCP
+- [x] Text Generator 决定不单独学习，视为其他应用中的基础生成能力
 - [x] 至少创建 1 个知识库并完成 RAG 问答
-- [ ] 至少注册 1 个 Tool 并完成 Agent 工具调用
-- [ ] 每类应用都有 API Key
-- [ ] 每类应用都有 curl 示例
-- [ ] blocking、streaming、多轮 conversation、workflow 节点、agent tool、RAG 检索都完成验证
-- [ ] 完成 Dify 与 Super Agent Console 的概念对照表
+- [x] 至少注册 1 个 Tool 并完成 Agent 工具调用
+- [x] 核心应用已完成 API 或页面验证
+- [x] blocking、streaming、多轮 conversation、workflow 节点、agent tool、RAG 检索都完成验证
+- [x] 完成 Dify 与 Super Agent Console 的概念对照表

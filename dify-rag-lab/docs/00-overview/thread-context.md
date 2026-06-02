@@ -2,6 +2,34 @@
 
 > 用途：这个文档用于在新的 Codex 线程中快速恢复上下文。新线程可以先阅读本文，再继续在 `/Users/duanhejin/personalProjects/dify-rag-lab` 项目中推进 Dify / RAG 学习与实验。
 
+## 0. 当前阶段状态
+
+Dify 学习主线已经收尾。
+
+已经完成：
+
+- 本地部署与模型接入
+- Chat Assistant
+- Knowledge / RAG
+- Chatflow
+- Workflow
+- Agent + Tool
+- MCP
+- 日志与 Trace 观察
+- Dify 与 Super Agent Console 概念对照
+
+当前决策：
+
+- API 汇总不再单独整理，后续直接参考 Dify 页面内置 API 文档。
+- Text Generator 不单独学习，视为其他应用形态中的基础生成能力。
+- 下一阶段建议新建项目 `langgraph-agent-lab`，研究 LangChain / LangGraph。
+
+下一阶段计划文档：
+
+```text
+dify-rag-lab/docs/00-overview/langchain-langgraph-learning-plan.md
+```
+
 ## 1. 背景
 
 当前已有一个自研项目：`Super Agent Console`。

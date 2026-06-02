@@ -55,6 +55,8 @@ docs/
 
 - `learning-plan.md`：Dify / RAG 总学习计划。
 - `thread-context.md`：用于新线程快速恢复项目背景、目录规则、学习进度和关键结论。
+- `dify-vs-super-agent-console.md`：Dify 与自研 Super Agent Console 的工程概念对照总结。
+- `langchain-langgraph-learning-plan.md`：下一阶段 LangChain / LangGraph 学习计划，可复制到新项目或新对话中使用。
 
 ### 01-chat-assistant
 
