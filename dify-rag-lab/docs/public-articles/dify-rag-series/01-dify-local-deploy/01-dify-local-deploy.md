@@ -182,13 +182,13 @@ git clone --depth 1 https://github.com/langgenius/dify.git
 本地目录大概是：
 
 ```text
-/Users/duanhejin/personalProjects/dify-rag-lab/dify
+~/personalProjects/dify-rag-lab/dify
 ```
 
 Docker Compose 目录是：
 
 ```text
-/Users/duanhejin/personalProjects/dify-rag-lab/dify/docker
+~/personalProjects/dify-rag-lab/dify/docker
 ```
 
 启动之后，浏览器访问：
